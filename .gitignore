@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+chron-tmp/
 
 ### STS ###
 .apt_generated
@@ -14,10 +15,10 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+#.idea
+#*.iws
+#*.iml
+#*.ipr
 
 ### NetBeans ###
 /nbproject/private/

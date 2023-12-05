@@ -1,30 +1,35 @@
 package com.adel.springchronicle.services.sender;
 
+import com.adel.springchronicle.config.QueueConfig;
+import com.adel.springchronicle.event.QueueEvent;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.openhft.chronicle.core.time.UniqueMicroTimeProvider;
-import net.openhft.chronicle.queue.RollCycle;
-import net.openhft.chronicle.queue.RollCycles;
-import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
-import org.springframework.beans.factory.annotation.Value;
+import net.openhft.chronicle.queue.ExcerptAppender;
+import net.openhft.chronicle.queue.impl.single.SingleChronicleQueue;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+
+import java.time.Clock;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@DependsOn("queueConfig")
 public class SenderService {
 
-	@Value("${queue.base.path}")
-	public String queueBasePath;
+	private final ApplicationEventPublisher applicationEventPublisher;
+	private final QueueConfig queueConfig;
 
 	@PostConstruct
 	public void init(){
-			final SingleChronicleQueueBuilder queueBuilder = SingleChronicleQueueBuilder
-							.single(queueBasePath)
-							.rollCycle(RollCycles.DEFAULT)
-							.timeProvider(new UniqueMicroTimeProvider());
+		final ExcerptAppender appender = queueConfig.getQueue().acquireAppender();
+		for (int i = 0; i <3; i++) {
+			appender.writeText("Test"+i);
+		}
+		applicationEventPublisher.publishEvent(new QueueEvent(this, Clock.systemUTC()));
 	}
 
 
