@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.openhft:chronicle-threads:2.24ea10">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/openhft/chronicle-threads/2.24ea10/chronicle-threads-2.24ea10.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/net/openhft/chronicle-threads/2.24ea10/chronicle-threads-2.24ea10-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/openhft/chronicle-threads/2.24ea10/chronicle-threads-2.24ea10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
