@@ -28,7 +28,8 @@ public class ReceiverService implements ApplicationListener<QueueEvent> {
 	}
 
 	public void readQueue() {
-		try (final ExcerptTailer tailer = queueConfig.getQueue().createTailer()) {
+		final SingleChronicleQueue queue = queueConfig.getQueue();
+		try (final ExcerptTailer tailer = queue.createTailer()) {
 			String msg;
 			do {
 				msg = tailer.readText();

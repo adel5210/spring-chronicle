@@ -27,9 +27,10 @@ public class SenderService {
 	public void init(){
 		final ExcerptAppender appender = queueConfig.getQueue().acquireAppender();
 		for (int i = 0; i <3; i++) {
-			appender.writeText("Sending -> Test"+i);
+			log.info("Sending -> Test"+i);
+			appender.writeText("Test"+i);
+			applicationEventPublisher.publishEvent(new QueueEvent(this, Clock.systemUTC()));
 		}
-		applicationEventPublisher.publishEvent(new QueueEvent(this, Clock.systemUTC()));
 	}
 
 
