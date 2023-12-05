@@ -33,7 +33,7 @@ public class ReceiverService implements ApplicationListener<QueueEvent> {
 			do {
 				msg = tailer.readText();
 				Optional.ofNullable(msg)
-								.ifPresent(p -> log.info("Reading -> {}", p));
+								.ifPresent(p -> log.info("Receiving -> {}", p));
 			} while (null != msg);
 		}
 	}
